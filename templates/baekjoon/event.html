@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동아리 이벤트 - 랭킹 시스템</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/event.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- 사이드바 - 회원가입 폼 -->
+        <div class="sidebar">
+            <h2>🎯 이벤트 참가하기</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="userId">아이디</label>
+                    <input type="text" id="userId" name="userId" placeholder="아이디를 입력하세요" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="handle">핸들</label>
+                    <input type="text" id="handle" name="handle" placeholder="게임 핸들을 입력하세요" required>
+                </div>
+                
+                <button type="submit" class="register-btn">참가 신청하기</button>
+            </form>
+        </div>
+
+        <!-- 메인 콘텐츠 - 랭킹 시스템 -->
+        <div class="main-content">
+            <div class="header">
+                <h1>🏆 동아리 이벤트 랭킹</h1>
+                <p>실시간 순위를 확인하고 최고 점수에 도전하세요!</p>
+            </div>
+
+            <div class="ranking-container">
+                <div class="ranking-header">
+                    <h2>실시간 랭킹</h2>
+                    <div class="total-participants">총 참가자: 127명</div>
+                </div>
+
+                <ul class="ranking-list">
+                    <li class="ranking-item top-1">
+                        <div class="medal">🥇</div>
+                        <div class="rank-number">1</div>
+                        <div class="user-info">
+                            <div class="user-handle">GameMaster2024</div>
+                            <div class="user-id">@master_gamer</div>
+                        </div>
+                        <div class="score">15,420</div>
+                    </li>
+
+                    <li class="ranking-item top-2">
+                        <div class="medal">🥈</div>
+                        <div class="rank-number">2</div>
+                        <div class="user-info">
+                            <div class="user-handle">ProPlayer99</div>
+                            <div class="user-id">@pro_player</div>
+                        </div>
+                        <div class="score">14,850</div>
+                    </li>
+
+                    <li class="ranking-item top-3">
+                        <div class="medal">🥉</div>
+                        <div class="rank-number">3</div>
+                        <div class="user-info">
+                            <div class="user-handle">SkillfulGamer</div>
+                            <div class="user-id">@skillful_one</div>
+                        </div>
+                        <div class="score">13,990</div>
+                    </li>
+
+                    <li class="ranking-item">
+                        <div class="rank-number">4</div>
+                        <div class="user-info">
+                            <div class="user-handle">FastFingers</div>
+                            <div class="user-id">@fast_fingers</div>
+                        </div>
+                        <div class="score">12,750</div>
+                    </li>
+
+                    <li class="ranking-item">
+                        <div class="rank-number">5</div>
+                        <div class="user-info">
+                            <div class="user-handle">CleverMind</div>
+                            <div class="user-id">@clever_mind</div>
+                        </div>
+                        <div class="score">11,680</div>
+                    </li>
+
+                    <li class="ranking-item">
+                        <div class="rank-number">6</div>
+                        <div class="user-info">
+                            <div class="user-handle">QuickThink</div>
+                            <div class="user-id">@quick_think</div>
+                        </div>
+                        <div class="score">10,920</div>
+                    </li>
+
+                    <li class="ranking-item">
+                        <div class="rank-number">7</div>
+                        <div class="user-info">
+                            <div class="user-handle">SmartPlayer</div>
+                            <div class="user-id">@smart_player</div>
+                        </div>
+                        <div class="score">9,850</div>
+                    </li>
+
+                    <li class="ranking-item">
+                        <div class="rank-number">8</div>
+                        <div class="user-info">
+                            <div class="user-handle">TalentedOne</div>
+                            <div class="user-id">@talented_one</div>
+                        </div>
+                        <div class="score">8,740</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src = "{% static 'js/event.js' %}"/>
+</body>
+</html>
