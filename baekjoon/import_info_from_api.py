@@ -1,45 +1,66 @@
 import requests
 
+
 def get_problem_info(nickname):
     try: 
-        a = requests.get("https://solved.ac/api/v3/user/problem_stats", params={"handle" : nickname}).json()
-        return a
-    except:
-        return "통신 에러..."
+        problem_info = requests.get("https://solved.ac/api/v3/user/problem_stats", params={"handle" : nickname}).json()
+        return problem_info
+    except requests.exceptions.Timeout as err1:
+        print("Timeout Error : ", err1)
+    except requests.exceptions.ConnectionError as err2:
+        print("Timeout Error : ", err2)
+    except requests.exceptions.HTTPError as err3:
+        print("Timeout Error : ", err3)
+    except requests.exceptions.TooManyRedirects as err4:
+        print("Timeout Error : ", err4)
+    except requests.exceptions.RequestException as err5:
+        print("Timeout Error : ", err5)
     
-def top_100_problem_rating():
+def top_100_problem(nickname):
     try: 
-        a = requests.get("https://solved.ac/api/v3/user/top_100", params={"handle" : "atopi0827"}).json()
-        print(a)
-        return a
-    except:
-        return "통신 에러..."
+        top_100 = requests.get("https://solved.ac/api/v3/user/top_100", params={"handle" : nickname}).json()
+        return top_100
+    except requests.exceptions.Timeout as err1:
+        print("Timeout Error : ", err1)
+    except requests.exceptions.ConnectionError as err2:
+        print("Timeout Error : ", err2)
+    except requests.exceptions.HTTPError as err3:
+        print("Timeout Error : ", err3)
+    except requests.exceptions.TooManyRedirects as err4:
+        print("Timeout Error : ", err4)
+    except requests.exceptions.RequestException as err5:
+        print("Timeout Error : ", err5)
     
-def user_handle_info():
+def user_handle_info(nickname):
     try: 
-        a = requests.get("https://solved.ac/api/v3/user/show", params={"handle" : "atopi0827"}).json()
-        print(a)
-        return a
-    except:
-        return "통신 에러..."
-
+        user_info = requests.get("https://solved.ac/api/v3/user/show", params={"handle" : nickname}).json()
+        return user_info
+    except requests.exceptions.Timeout as err1:
+        print("Timeout Error : ", err1)
+    except requests.exceptions.ConnectionError as err2:
+        print("Timeout Error : ", err2)
+    except requests.exceptions.HTTPError as err3:
+        print("Timeout Error : ", err3)
+    except requests.exceptions.TooManyRedirects as err4:
+        print("Timeout Error : ", err4)
+    except requests.exceptions.RequestException as err5:
+        print("Timeout Error : ", err5)
 
 #problem
-#parmas 부분 parameter로 받아서 처리?
-def problem_to_num():
-    try: 
-        a = requests.get("https://solved.ac/api/v3/problem/lookup", params={"handle" : "atopi0827"}).json()
-        print(a)
-        return a
-    except:
-        return "통신 에러..."
-
 def num_to_problem(problem_num):
     try: 
-        a = requests.get("https://solved.ac/api/v3/problem/lookup", params={"problemIds" : problem_num}).json()
-        print(a)
-        return a
-    except:
-        return "통신 에러..."
+        problem = requests.get("https://solved.ac/api/v3/problem/lookup", params={"problemIds" : [1000]}).json()
+        print(problem)
+        return problem
+    except requests.exceptions.Timeout as err1:
+        print("Timeout Error : ", err1)
+    except requests.exceptions.ConnectionError as err2:
+        print("Timeout Error : ", err2)
+    except requests.exceptions.HTTPError as err3:
+        print("Timeout Error : ", err3)
+    except requests.exceptions.TooManyRedirects as err4:
+        print("Timeout Error : ", err4)
+    except requests.exceptions.RequestException as err5:
+        print("Timeout Error : ", err5)
 
 num_to_problem(1000)
