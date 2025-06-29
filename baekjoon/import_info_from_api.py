@@ -50,7 +50,6 @@ def user_handle_info(nickname):
 def num_to_problem(problem_num):
     try: 
         problem = requests.get("https://solved.ac/api/v3/problem/lookup", params={"problemIds" : [1000]}).json()
-        print(problem)
         return problem
     except requests.exceptions.Timeout as err1:
         print("Timeout Error : ", err1)
@@ -62,5 +61,3 @@ def num_to_problem(problem_num):
         print("Timeout Error : ", err4)
     except requests.exceptions.RequestException as err5:
         print("Timeout Error : ", err5)
-
-num_to_problem(1000)
