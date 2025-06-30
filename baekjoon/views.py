@@ -2,4 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-    return render(request,'baekjoon/event.html')
+    data = {
+        "total_participants" : 3,
+    }
+    return render(request,'baekjoon/event.html', data)

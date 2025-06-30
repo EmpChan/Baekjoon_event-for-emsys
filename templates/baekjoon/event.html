@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>동아리 이벤트 - 랭킹 시스템</title>
+    <title>백준 이벤트 - PS 최강자를 찾아서</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/event.css' %}">
 </head>
@@ -12,10 +12,10 @@
         <!-- 사이드바 - 회원가입 폼 -->
         <div class="sidebar">
             <h2>🎯 이벤트 참가하기</h2>
-            <form id="registerForm">
+            <form id="registerForm" method="post">
                 <div class="form-group">
-                    <label for="userId">아이디</label>
-                    <input type="text" id="userId" name="userId" placeholder="아이디를 입력하세요" required>
+                    <label for="userId">이름</label>
+                    <input type="text" id="userId" name="userId" placeholder="이름을 입력하세요" required>
                 </div>
                 
                 <div class="form-group">
@@ -25,7 +25,7 @@
                 
                 <div class="form-group">
                     <label for="handle">핸들</label>
-                    <input type="text" id="handle" name="handle" placeholder="게임 핸들을 입력하세요" required>
+                    <input type="text" id="handle" name="handle" placeholder="백준 핸들을 입력하세요" required>
                 </div>
                 
                 <button type="submit" class="register-btn">참가 신청하기</button>
@@ -41,85 +41,26 @@
 
             <div class="ranking-container">
                 <div class="ranking-header">
-                    <h2>실시간 랭킹</h2>
-                    <div class="total-participants">총 참가자: 127명</div>
+                    <h2>실시간 랭킹 - 매 2시간마다 업데이트!</h2>
+                    {% if total_participants %}
+                    <div class="total-participants">총 {{total_participants}}명</div>
+                    {% else %}
+                    <div class="total-participants"> 참가자가 없습니다.</div>
+                    {% endif %}
                 </div>
 
                 <ul class="ranking-list">
-                    <li class="ranking-item top-1">
+                    {% for participants in user_list %}
+                    <li class="ranking-item">
                         <div class="medal">🥇</div>
-                        <div class="rank-number">1</div>
+                        <div class="rank-number">{{cnt}}</div>
                         <div class="user-info">
-                            <div class="user-handle">GameMaster2024</div>
-                            <div class="user-id">@master_gamer</div>
+                            <div class="user-handle">{{participants.name}}</div>
+                            <div class="user-id">{{participants.handle}}</div>
                         </div>
-                        <div class="score">15,420</div>
+                        <div class="score">{{participants.score}}</div>
                     </li>
-
-                    <li class="ranking-item top-2">
-                        <div class="medal">🥈</div>
-                        <div class="rank-number">2</div>
-                        <div class="user-info">
-                            <div class="user-handle">ProPlayer99</div>
-                            <div class="user-id">@pro_player</div>
-                        </div>
-                        <div class="score">14,850</div>
-                    </li>
-
-                    <li class="ranking-item top-3">
-                        <div class="medal">🥉</div>
-                        <div class="rank-number">3</div>
-                        <div class="user-info">
-                            <div class="user-handle">SkillfulGamer</div>
-                            <div class="user-id">@skillful_one</div>
-                        </div>
-                        <div class="score">13,990</div>
-                    </li>
-
-                    <li class="ranking-item">
-                        <div class="rank-number">4</div>
-                        <div class="user-info">
-                            <div class="user-handle">FastFingers</div>
-                            <div class="user-id">@fast_fingers</div>
-                        </div>
-                        <div class="score">12,750</div>
-                    </li>
-
-                    <li class="ranking-item">
-                        <div class="rank-number">5</div>
-                        <div class="user-info">
-                            <div class="user-handle">CleverMind</div>
-                            <div class="user-id">@clever_mind</div>
-                        </div>
-                        <div class="score">11,680</div>
-                    </li>
-
-                    <li class="ranking-item">
-                        <div class="rank-number">6</div>
-                        <div class="user-info">
-                            <div class="user-handle">QuickThink</div>
-                            <div class="user-id">@quick_think</div>
-                        </div>
-                        <div class="score">10,920</div>
-                    </li>
-
-                    <li class="ranking-item">
-                        <div class="rank-number">7</div>
-                        <div class="user-info">
-                            <div class="user-handle">SmartPlayer</div>
-                            <div class="user-id">@smart_player</div>
-                        </div>
-                        <div class="score">9,850</div>
-                    </li>
-
-                    <li class="ranking-item">
-                        <div class="rank-number">8</div>
-                        <div class="user-info">
-                            <div class="user-handle">TalentedOne</div>
-                            <div class="user-id">@talented_one</div>
-                        </div>
-                        <div class="score">8,740</div>
-                    </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
