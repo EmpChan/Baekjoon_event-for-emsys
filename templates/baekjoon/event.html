@@ -15,16 +15,6 @@
             <form id="registerForm" method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="userId">이름</label>
-                    <input type="text" id="userId" name="userId" placeholder="이름을 입력하세요" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">비밀번호</label>
-                    <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
-                </div>
-                
-                <div class="form-group">
                     <label for="handle">핸들</label>
                     <input type="text" id="handle" name="handle" placeholder="백준 핸들을 입력하세요" required>
                 </div>
@@ -51,6 +41,7 @@
                 </div>
 
                 <ul class="ranking-list">
+                    {% if total_participants %}
                     {% for participants in user_list %}
                     <li class="ranking-item">
                         <div class="medal">🥇</div>
@@ -62,6 +53,9 @@
                         <div class="score">{{participants.score}}</div>
                     </li>
                     {% endfor %}
+                    {% else %}
+                    <li class = "ranking-item">참여자가 없습니다.</li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
