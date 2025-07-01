@@ -1,7 +1,7 @@
 import math
 import import_info_from_api as api
 #점수 계산
-def Basic_Score(tier,problem_tier,count,isfirst=True):
+def BasicScore(tier,problem_tier,count,isfirst=True):
     score=None
     if tier >=18:#플레 3이상
         problem_score=problem_tier-tier**(1.2)
