@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>백준 이벤트 - PS 최강자를 찾아서</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/event.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- 사이드바 - 회원가입 폼 -->
+        <div class="sidebar">
+            <h2>🎯 이벤트 참가하기</h2>
+            <form id="registerForm" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="handle">핸들</label>
+                    <input type="text" id="handle" name="handle" placeholder="백준 핸들을 입력하세요" required>
+                </div>
+                
+                <button type="submit" class="register-btn">참가 신청하기</button>
+            </form>
+        </div>
+
+        <!-- 메인 콘텐츠 - 랭킹 시스템 -->
+        <div class="main-content">
+            <div class="header">
+                <h1>🏆 동아리 이벤트 랭킹</h1>
+                <p>실시간 순위를 확인하고 최고 점수에 도전하세요!</p>
+            </div>
+
+            <div class="ranking-container">
+                <div class="ranking-header">
+                    <h2>실시간 랭킹 - 매 2시간마다 업데이트!</h2>
+                    {% if total_participants %}
+                    <div class="total-participants">총 {{total_participants}}명</div>
+                    {% else %}
+                    <div class="total-participants"> 참가자가 없습니다.</div>
+                    {% endif %}
+                </div>
+
+                <ul class="ranking-list">
+                    {% if total_participants %}
+                    {% for participants in user_list %}
+                    <li class="ranking-item">
+                        <div class="medal">🥇</div>
+                        <div class="rank-number">{{cnt}}</div>
+                        <div class="user-info">
+                            <div class="user-handle">{{participants.name}}</div>
+                            <div class="user-id">{{participants.handle}}</div>
+                        </div>
+                        <div class="score">{{participants.score}}</div>
+                    </li>
+                    {% endfor %}
+                    {% else %}
+                    <li class = "ranking-item">참여자가 없습니다.</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src = "{% static 'js/event.js' %}"/>
+</body>
+</html>
