@@ -1,7 +1,6 @@
 from django.db import models
 
 class event_participants(models.Model):
-    pid = models.IntegerField() #참여자 id, 모델의 PK와 별개
     handle = models.CharField() #유저 핸들
 
     def __str__(self): #핸들과 pid 출력,,,

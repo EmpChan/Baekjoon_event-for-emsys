@@ -35,5 +35,5 @@ def ApiScore(nickname):
     tier = (api.user_handle_info(nickname)["tier"])
     score=0
     for item in info:
-        score+=Basic_Score(tier,item["level"],item["solved"])
+        score+=BasicScore(tier,item["level"],item["solved"])
     return score
