@@ -2,6 +2,7 @@ from django.db import models
 
 class EventParticipants(models.Model):
     handle = models.CharField() #유저 핸들
+    score = models.IntegerField() # score
 
     def __str__(self): #핸들과 pid 출력,,,
         return f"{self.handle} ({self.pid})"

@@ -18,7 +18,9 @@
                     <label for="handle">핸들</label>
                     <input type="text" id="handle" name="handle" placeholder="백준 핸들을 입력하세요" required>
                 </div>
-                
+                {% if error %}
+                <div>{{error}}</div>
+                {% endif %}
                 <button type="submit" class="register-btn">참가 신청하기</button>
             </form>
         </div>
