@@ -4,28 +4,28 @@ from . import import_info_from_api as api
 def basicScore(tier,problem_tier,count,isfirst=True):
     score=None
     if tier >=18:#플레 3이상
-        problem_score=problem_tier-tier**(1.2)
+        problem_score=problem_tier-tier**(1.1)
         if problem_score<0:
-            problem_score*=1.2
+            problem_score*=1.05
         else:
-            problem_score*=0.8
+            problem_score*=0.95
         score=max(0.2,problem_score+(25 if isfirst else 15)) 
     elif tier>=13:#골드 3이상
-        problem_score=problem_tier-tier**(1.2)
+        problem_score=problem_tier-tier**(1.1)
         score=max(0.5,problem_score+(25 if isfirst else 15)) 
     elif tier>=8:#실버 3이상
         problem_score=problem_tier-tier**1
         if problem_score<0:
-            problem_score*=0.8
+            problem_score*=0.9
         else:
-            problem_score*=1.2
+            problem_score*=1.1
         score=max(1,problem_score+(25 if isfirst else 15)) 
     else: # 그 이하
         problem_score=problem_tier-tier**1
         if problem_score<0:
             problem_score=0
         else:
-            problem_score*=1.5
+            problem_score*=1.35
         score=max(1,problem_score+(25 if isfirst else 15)) 
     
     return score*count
