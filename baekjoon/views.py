@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import *
-import score_method
+from . import score_method
 
 # Create your views here.
 def index(request):

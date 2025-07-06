@@ -1,5 +1,5 @@
 from .models import *
-import import_info_from_api as api
+from . import import_info_from_api as api
 #점수 계산
 def basicScore(tier,problem_tier,count,isfirst=True):
     score=None
