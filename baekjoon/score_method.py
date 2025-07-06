@@ -1,46 +1,36 @@
 from .models import *
 from . import import_info_from_api as api
-#점수 계산
+
 def basicScore(tier,problem_tier,count,isfirst=True):
-    score=None
-    if tier >=18:#플레 3이상
-        problem_score=problem_tier-tier**(1.2)
-        if problem_score<0:
-            problem_score*=1.2
-        else:
-            problem_score*=0.8
-        score=max(0.2,problem_score+(25 if isfirst else 15)) 
-    elif tier>=13:#골드 3이상
-        problem_score=problem_tier-tier**(1.2)
-        score=max(0.5,problem_score+(25 if isfirst else 15)) 
-    elif tier>=8:#실버 3이상
-        problem_score=problem_tier-tier**1
-        if problem_score<0:
-            problem_score*=0.8
-        else:
-            problem_score*=1.2
-        score=max(1,problem_score+(25 if isfirst else 15)) 
-    else: # 그 이하
-        problem_score=problem_tier-tier**1
-        if problem_score<0:
-            problem_score=0
-        else:
-            problem_score*=1.5
-        score=max(1,problem_score+(25 if isfirst else 15)) 
+    score=0
+    problem_base_weight = [1,1,1.1,1.1]
+    problem_additional_weight_upper_zero = [1.35,1.1,1,0.95]
+    problem_additional_weight_under_zero = [0,0.9,1,1.05]
+    minimum_score = [1,1,0.5,0.2]
+    level = max(0,min((tier-3)//5,3))
+    problem_score=problem_tier-tier**(problem_base_weight[level])
+    if problem_score < 0:
+        problem_score*=problem_additional_weight_under_zero[level]
+    else:
+        problem_score*=problem_additional_weight_upper_zero[level]
+    score=max(minimum_score[level],problem_score+15) 
     
-    return score*count
+    return score*count + 5 if isfirst else 0 
 
 #API 호출해서 점수 계산 함수
-def apiScore(handle):
-    part = EventParticipants.objects.filter(handle=part)
-    info = api.get_problem_info(handle)
-    tier = (api.user_handle_info(handle)["tier"])
+def apiScore(obj):
+    part = EventParticipants.objects.filter(handle=obj.handle)
+    info = api.get_problem_info(obj.handle)
+    tier = (api.user_handle_info(obj.handle)["tier"])
     score=0
+    is_first=True
     for item in info:
-        score+=basicScore(tier,item["level"],item["solved"])
-        score_obj = Solved.objects.filter(pid=part.pk,tier=item["level"])
+        score_obj = Solved.objects.get(pid=obj,tier=item["level"])
+        score+=basicScore(int(tier),int(item["level"]),int(item["solved"]-score_obj.tier_solved_cnt),is_first)
         score_obj.tier_solved_cnt = item["solved"]
         score_obj.save()
+        if score:
+            is_first = False
     return score
 
 def makeScore(pid,tiers):
@@ -54,11 +44,8 @@ def makeScore(pid,tiers):
 def updateScore():
     partcis = EventParticipants.objects.all()
     for i in partcis:
-        score = Solved.objects.filter(pid=i.pk)
-        if score is None:
-            makeScore(i.pk, api.get_problem_info(i.handle))
-        else:
-            i.score=apiScore(i.handle)
-            i.save()
-        
-        
+        print(i)
+        score = Solved.objects.filter(pid=i)
+        i.score+=apiScore(i)
+        i.save()
+        print(i)

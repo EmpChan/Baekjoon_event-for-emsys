@@ -12,7 +12,7 @@
         <!-- 사이드바 - 회원가입 폼 -->
         <div class="sidebar">
             <h2>🎯 이벤트 참가하기</h2>
-            <form id="registerForm" method="post">
+            <form id="registerForm" method="post" action="{% url 'boj:event' %}">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="handle">핸들</label>
@@ -34,7 +34,7 @@
 
             <div class="ranking-container">
                 <div class="ranking-header">
-                    <h2>실시간 랭킹 - 매 2시간마다 업데이트!</h2>
+                    <h2>실시간 랭킹 - 매일 자정마다 업데이트!</h2>
                     {% if total_participants %}
                     <div class="total-participants">총 {{total_participants}}명</div>
                     {% else %}

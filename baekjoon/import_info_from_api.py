@@ -45,6 +45,7 @@ def user_handle_info(handle):
         print("Timeout Error : ", err4)
     except requests.exceptions.RequestException as err5:
         print("Timeout Error : ", err5)
+    return None
 
 #problem
 def num_to_problem(problem_num):

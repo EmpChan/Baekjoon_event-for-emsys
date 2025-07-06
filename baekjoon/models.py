@@ -5,7 +5,7 @@ class EventParticipants(models.Model):
     score = models.IntegerField() # score
 
     def __str__(self): #핸들과 pid 출력,,,
-        return f"{self.handle} ({self.pid})"
+        return f"{self.handle} {self.score})"
 
 class Solved(models.Model):
     pid = models.ForeignKey(EventParticipants, on_delete=models.CASCADE) #모델 연결 / event_participants <-> Solved
@@ -14,3 +14,9 @@ class Solved(models.Model):
 
     def __str__(self): #유저 id - 문제 티어 - 푼 개수 출력
         return f"{self.pid.pid} - Tier {self.tier} - {self.tier_solved_cnt}개"
+    
+class TimeCheck(models.Model):
+    last_day = models.CharField(max_length=30)
+
+    def __str__(self):
+        return f"{self.last_day}"
