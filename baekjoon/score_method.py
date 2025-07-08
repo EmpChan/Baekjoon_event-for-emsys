@@ -14,8 +14,10 @@ def basicScore(tier,problem_tier,count,isfirst=True):
     else:
         problem_score*=problem_additional_weight_upper_zero[level]
     score=max(minimum_score[level],problem_score+15) 
-    
-    return score*count + 5 if isfirst and score else 0 
+    w = 0
+    if isfirst and score > 0:
+       w=5 
+    return score*count + w
 
 #API 호출해서 점수 계산 함수
 def apiScore(obj):
