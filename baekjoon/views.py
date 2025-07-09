@@ -11,7 +11,7 @@ def makeTimeCheck(cur_time):
 
 # Create your views here.
 def index(request):
-    x = EventParticipants.objects.all()
+    x = EventParticipants.objects.all().order_by('score')[::-1]
     data = {
         'total_participants' : len(x) if len(x) else '',
         'user_list' : x,

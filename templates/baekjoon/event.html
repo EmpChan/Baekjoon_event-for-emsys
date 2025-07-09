@@ -323,14 +323,27 @@
                 <ul class="ranking-list">
                     {% if total_participants %}
                     {% for participants in user_list %}
-                    <li class="ranking-item">
+                    
+                    
+                    {% if forloop.counter == 1 %}
+                    <li class="ranking-item top-1">
                         <div class="medal">🥇</div>
-                        <div class="rank-number">{{cnt}}</div>
+                    {% elif forloop.counter == 2 %}
+                    <li class="ranking-item top-2">
+                        <div class="medal">🥈</div>
+                    {% elif forloop.counter == 3 %}
+                    <li class="ranking-item top-3">
+                        <div class="medal">🥉</div>
+                    {% else %}
+                    <li class="ranking-item">
+                    {% endif %}
+                        <div class="rank-number">{{forloop.counter}}</div>
                         <div class="user-info">
                             <div class="user-id">{{participants.handle}}</div>
                         </div>
                         <div class="score">{{participants.score}}</div>
                     </li>
+                    
                     {% endfor %}
                     {% else %}
                     <li class = "ranking-item">참여자가 없습니다.</li>
