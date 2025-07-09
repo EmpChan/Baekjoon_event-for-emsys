@@ -6,7 +6,7 @@ def basicScore(tier,problem_tier,count,isfirst=True):
     problem_base_weight = [1,1,1.1,1.1]
     problem_additional_weight_upper_zero = [1.35,1.1,1,0.95]
     problem_additional_weight_under_zero = [0,0.9,1,1.05]
-    minimum_score = [1,1,0.5,0.2]
+    minimum_score = [10,10,5,2]
     level = max(0,min((tier-3)//5,3))
     problem_score=problem_tier-tier**(problem_base_weight[level])
     if problem_score < 0:
@@ -15,11 +15,11 @@ def basicScore(tier,problem_tier,count,isfirst=True):
         problem_score*=problem_additional_weight_upper_zero[level]
     score=max(minimum_score[level],problem_score+15) 
     w = 0
-    if isfirst and score > 0:
-       w=5 
+    if isfirst and count > 0:
+       w=50 
     return score*count + w
 
-#API 호출해서 점수 계산 함수
+#API 호출해서 점g수 계산 함수
 def apiScore(obj):
     part = EventParticipants.objects.filter(handle=obj.handle)
     info = api.get_problem_info(obj.handle)
