@@ -125,14 +125,9 @@
             flex: 1;
             max-height: 70vh;
             box-sizing: border-box;
-            overflow-y: auto;
-            -ms-overflow-style: none;
-            scrollbar-width: none; 
         }
 
-        .ranking-container::-webkit-scrollbar {
-            display: none;
-        }
+        
 
         .ranking-header {
             display: flex;
@@ -159,9 +154,14 @@
         }
 
         .ranking-list {
-            list-style: none;
+            overflow-y: auto;
+            max-height: 50vh;
         }
 
+        .ranking-list::-webkit-scrollbar {
+            display: none;
+        }
+        
         .ranking-item {
             display: flex;
             align-items: center;
