@@ -20,6 +20,7 @@ def index(request):
 
     cur_time = time.ctime().split()
     cur_time = (cur_time[1]+cur_time[2]).strip()
+    print(time.ctime(), cur_time)
     try:  
         time_obj = TimeCheck.objects.get(pk=1)
         if time_obj.last_day != cur_time:

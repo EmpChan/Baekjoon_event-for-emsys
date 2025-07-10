@@ -47,6 +47,7 @@ def updateScore():
     partcis = EventParticipants.objects.all()
     for i in partcis:
         score = Solved.objects.filter(pid=i)
-        print(f'{i} got a additional score : {score}')
-        i.score+=apiScore(i)
+        x = apiScore(i)
+        print(f'{i} got a additional score : {x}')
+        i.score+=x
         i.save()
